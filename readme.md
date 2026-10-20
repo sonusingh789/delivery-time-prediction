@@ -1,4 +1,4 @@
-```markdown
+
 # Delivery Time Prediction Project: End-to-End ML Pipeline Documentation
 
 This notebook documents the building of an end-to-end Machine Learning pipeline to predict the delivery time (in minutes) for orders based on various factors.
@@ -37,4 +37,3 @@ This notebook documents the building of an end-to-end Machine Learning pipeline 
 | **Random Forest (Tuned)** | **Test** | **3.088** | **3.882** | **0.827** |
 
 *The Tuned Random Forest model was successfully serialized into `rf_best.pkl` alongside the standard scaler for production use.*
-```
