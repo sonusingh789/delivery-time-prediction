@@ -1,8 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Dashdrop | Food delivery estimate",
-  description: "Predict food delivery arrival times with a trained machine learning model.",
+  title: " Food Delivery Time Prediction",
+  description:
+    "Predict food delivery arrival times with a trained machine learning model.",
 };
 
 export default function RootLayout({ children }) {
