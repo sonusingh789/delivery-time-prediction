@@ -58,7 +58,7 @@ Open [`http://localhost:3000`](http://localhost:3000). The frontend defaults to 
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-Restart the Next.js dev server after changing the environment variable. The API currently allows browser requests from `localhost:3000` and `127.0.0.1:3000`; update the CORS allow-list in `api/main.py` if you use a different frontend origin.
+Restart the Next.js dev server after changing the environment variable. The API allows local development origins and any production origins listed in its `CORS_ORIGINS` environment variable. In Render, set `CORS_ORIGINS` to your Vercel site origin, for example `https://your-project.vercel.app` (no trailing slash). For multiple domains, separate origins with commas.
 
 ## API endpoints
 

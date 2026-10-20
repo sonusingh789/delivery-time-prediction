@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 from typing import Literal
 
 import joblib
@@ -37,9 +38,15 @@ FEATURES = [
 ]
 
 app = FastAPI(title="Delivery Time Prediction API", version="1.0.0")
+allowed_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+allowed_origins.extend(
+    origin.strip().rstrip("/")
+    for origin in os.getenv("CORS_ORIGINS", "").split(",")
+    if origin.strip()
+)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
