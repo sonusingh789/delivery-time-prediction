@@ -4,7 +4,7 @@ An end-to-end machine learning project that estimates how long a food order may 
 
 The estimate is returned in **minutes**. It is a prediction based on historical patterns in the data; actual delivery times can differ.
 
-## Project contents
+## Contents
 
 | Path | Description |
 | --- | --- |
@@ -54,18 +54,6 @@ The full setup, endpoint details, example payload, and input constraints are in 
 
 The serving API validates inputs against supported values and ranges. In particular, the interactive app accepts trips from **1.4 to 21 km** and order hours from **08:00 to 23:00**, which reflect the observed range in the cleaned data used by this project. Inputs outside the supported range are rejected rather than extrapolated.
 
-## Reproducing the notebook
-
-From the project root, create a Python environment and install the notebook dependencies:
-
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-jupyter notebook delivery_time_prediction.ipynb
-```
-
-Run the notebook cells sequentially so that cleaning, feature generation, encoding, scaling, and training use the same data state. The serialization cell writes `rf_best.pkl` and `standard_scaler.pkl` to the notebook’s current working directory. Copy both files into `delivery-time-api/api` if you retrain the model and want the API to serve that newly trained pair.
 
 ## Limitations
 
