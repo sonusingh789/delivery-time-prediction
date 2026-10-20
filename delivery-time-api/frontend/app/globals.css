@@ -117,3 +117,41 @@ body { background: linear-gradient(180deg, #fff0f2 0, #fff8f8 390px, #fff 100%);
 .delivery-scooter .rider-head { fill: #f4bd3e; stroke: #d9364b; }
 @keyframes scooter-drive { from { left: -52px; } to { left: calc(100% + 52px); } }
 @media (prefers-reduced-motion: reduce) { .delivery-scooter { left: 18px; animation: none; } }
+html, body { overflow-x: clip; }
+@media (min-width: 1100px) and (max-height: 1000px) {
+  .shell { width: min(1520px, calc(100% - 48px)); min-height: 100svh; }
+  .topbar { height: 68px; }
+  .hero { grid-template-columns: .72fr 1.28fr; gap: clamp(24px, 3vw, 44px); flex: 1; align-items: center; padding: 14px 0; }
+  .hero-copy { padding: 0; }
+  h1 { font-size: clamp(42px, 4.2vw, 60px); letter-spacing: -3px; }
+  .intro { max-width: 360px; margin-top: 14px; font-size: 13px; line-height: 1.5; }
+  .route-art { height: 86px; margin-top: 20px; }
+  .planner-card { padding: 15px 18px 13px; }
+  .planner-card .card-heading { margin-bottom: 8px; }
+  .planner-card .eyebrow { margin-bottom: 5px; }
+  .planner-card h2 { font-size: 18px; }
+  .section-label { margin: 8px 0 4px; font-size: 8px; }
+  .trip-stats { gap: 8px; }
+  .stat-control { padding: 7px 10px 5px; }
+  .stat-control > span { font-size: 7px; }
+  .stat-control input:not(.range) { font-size: 16px; }
+  .stat-control .range { margin-top: 5px; }
+  .choice-section { margin-top: 7px; }
+  .choice-grid { gap: 6px; }
+  .choice { min-height: 37px; gap: 5px; padding: 5px 7px; }
+  .choice-icon { font-size: 14px; }
+  .choice-title { font-size: 8px; }
+  .more-details { margin-top: 8px; padding-top: 6px; }
+  .more-details .section-label { margin: 0 0 5px; }
+  .detail-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; margin-top: 5px; }
+  .field { gap: 4px; }
+  .field > label { font-size: 8px; }
+  .detail-grid .field input { height: 32px; padding: 0 7px; font-size: 10px; }
+  .select-trigger { min-height: 32px; padding: 0 7px; font-size: 9px; }
+  .select-option { font-size: 10px; }
+  .planner-card .submit { margin-top: 9px; padding: 10px 12px; font-size: 11px; }
+  .result { min-height: 70px; padding: 10px 12px 31px; }
+  .result strong { font-size: 21px; }
+  footer { min-height: 46px; font-size: 9px; }
+  .limitations p + p { font-size: 8px; }
+}
