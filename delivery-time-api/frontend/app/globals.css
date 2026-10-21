@@ -117,3 +117,7 @@ body { background: linear-gradient(180deg, #fff0f2 0, #fff8f8 390px, #fff 100%);
 .delivery-scooter .rider-head { fill: #f4bd3e; stroke: #d9364b; }
 @keyframes scooter-drive { from { left: -52px; } to { left: calc(100% + 52px); } }
 @media (prefers-reduced-motion: reduce) { .delivery-scooter { left: 18px; animation: none; } }
+.planner-card .waiting { display: flex; align-items: center; gap: 10px; background: #fff5f2; color: #73534f; line-height: 1.5; }
+.loading-indicator { flex: 0 0 14px; width: 14px; height: 14px; border: 2px solid #f3c9c7; border-top-color: var(--green); border-radius: 50%; animation: request-spin .8s linear infinite; }
+@keyframes request-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .loading-indicator { animation: none; } }

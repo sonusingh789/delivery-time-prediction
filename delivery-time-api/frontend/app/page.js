@@ -73,12 +73,15 @@ export default function Home() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [serverStarting, setServerStarting] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
+    setServerStarting(false);
     setError("");
     setResult(null);
+    const startupTimer = setTimeout(() => setServerStarting(true), 2500);
     const payload = { ...values };
     for (const field of fields) {
       if (field.type === "number" || ["Vehicle_condition", "multiple_deliveries"].includes(field.name)) {
@@ -103,7 +106,9 @@ export default function Home() {
     } catch (requestError) {
       setError(requestError.message || "Could not connect to the prediction API.");
     } finally {
+      clearTimeout(startupTimer);
       setLoading(false);
+      setServerStarting(false);
     }
   }
 
@@ -121,8 +126,9 @@ export default function Home() {
             </div>
             {[["Weather_conditions", "02", "WEATHER"], ["Road_traffic_density", "03", "ROAD TRAFFIC"], ["Type_of_vehicle", "04", "COURIER VEHICLE"], ["Type_of_order", "05", "ORDER TYPE"]].map(([name, number, title]) => <div className="choice-section" key={name}><div className="section-label"><span>{number}</span> {title}</div><div className={`choice-grid ${name === "Road_traffic_density" ? "traffic-grid" : ""} ${name === "Type_of_vehicle" || name === "Type_of_order" ? "compact-grid" : ""}`}>{visualChoices[name].map(([value, icon, caption]) => <button className={`choice ${values[name] === value ? "selected" : ""}`} type="button" key={value} aria-pressed={values[name] === value} onClick={() => setValues({ ...values, [name]: value })}><span className="choice-icon">{icon}</span><span className="choice-title">{caption}</span>{values[name] === value && <span className="check">✓</span>}</button>)}</div></div>)}
             <div className="more-details"><div className="section-label"><span>06</span> DELIVERY DETAILS <small>PARTNER, VEHICLE & CITY</small></div><div className="detail-grid">{fields.filter((field) => ["Delivery_person_Age", "Delivery_person_Ratings", "Vehicle_condition", "multiple_deliveries", "Festival", "City"].includes(field.name)).map((field) => <div className="field" key={field.name}><label htmlFor={field.name}>{field.name === "Vehicle_condition" ? "Vehicle condition score" : field.name === "multiple_deliveries" ? "Other deliveries" : field.label}</label>{field.options ? <CustomSelect label={field.name} options={field.options} value={values[field.name]} onChange={(value) => setValues({ ...values, [field.name]: value })} /> : <input id={field.name} required type="number" min={field.min} max={field.max} step={field.step} value={values[field.name]} onChange={(event) => setValues({ ...values, [field.name]: event.target.value })} />}</div>)}</div></div>
-            <button className="submit" type="submit" disabled={loading}>{loading ? "Mapping your journey…" : <> <span>Calculate arrival estimate</span><span className="submit-arrow" aria-hidden="true">↗</span></>}</button>
+            <button className="submit" type="submit" disabled={loading}>{loading ? "Mapping your journey · Predicting time…" : <> <span>Calculate arrival estimate</span><span className="submit-arrow" aria-hidden="true">↗</span></>}</button>
           </form>
+          {loading && <div className="notice waiting" role="status" aria-live="polite"><span className="loading-indicator" aria-hidden="true" />{serverStarting ? "The server may be starting up after a period of inactivity. This first estimate can take up to a minute." : "Predicting your delivery time…"}</div>}
           {error && <p className="notice error" role="alert">{error}</p>}
           {result !== null && <div className="notice result" role="status"><span>ESTIMATED DELIVERY TIME</span><strong>{result}<small> min</small></strong><span className="result-road" aria-hidden="true" /><svg className="delivery-scooter" viewBox="0 0 78 48" aria-hidden="true"><circle cx="19" cy="37" r="7" /><circle cx="58" cy="37" r="7" /><path d="M18 36h18l8-13h11l6 13H45l-9-13h-9l-6 13Zm26-13 5-10h8l5 10M28 23l-4-7h-8M47 13l3-5h8l4 5" /><path className="scooter-box" d="M43 9h12V2H43z" /><circle className="rider-head" cx="37" cy="7" r="5" /></svg></div>}
         </div>
