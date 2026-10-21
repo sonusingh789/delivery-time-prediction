@@ -57,6 +57,6 @@ The serving API validates inputs against supported values and ranges. In particu
 
 ## Limitations
 
-- The model reflects the dataset and preprocessing used in the notebook; it does not account for live maps, current weather feeds, restaurant preparation status, or real-time courier location.
+- The model reflects the dataset; it does not account for live maps, current weather feeds, restaurant preparation status, or real-time courier location.
 - Predictions are estimates, not guaranteed arrival times.
 - The API supports only the categories and numeric ranges.
